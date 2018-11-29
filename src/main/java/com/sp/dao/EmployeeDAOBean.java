@@ -1,7 +1,9 @@
 package com.sp.dao;
 
 import com.sp.models.Employee;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface EmployeeDAOBean {
 
     public void createEmployeeInDataBase(Employee employee);

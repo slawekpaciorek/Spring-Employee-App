@@ -1,6 +1,10 @@
 package com.sp.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="employee")
@@ -10,15 +14,22 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotNull(message = "required")
     @Column(nullable = false)
     private String name;
 
+    @NotNull(message = "required")
     @Column(nullable = false)
     private String lastName;
 
+    @Pattern(regexp = "\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b", message = "not valid email")
+    @NotNull(message = "required")
     @Column(unique = true, nullable = false)
     private String email;
 
+    @NotNull(message = "required")
+    @Min(value = 1260, message = "basic salary is equal to 1260")
+    @Max(value = 20000, message = "max salary is equal to 20000")
     @Column(nullable = false)
     private Double salary;
 
