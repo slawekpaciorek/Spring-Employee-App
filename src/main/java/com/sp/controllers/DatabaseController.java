@@ -68,4 +68,38 @@ public class DatabaseController {
 
     }
 
+    @RequestMapping("/find-employee")
+    public String findEmployee(Model model){
+
+        Employee employee = new Employee();
+        model.addAttribute("employee", employee);
+
+        return "find-employee";
+    }
+
+    @RequestMapping("/employee-card")
+    public String showEmployee(
+            @Valid @ModelAttribute("employee") Employee employee,
+            BindingResult bindingResult,
+            Model model){
+
+        Employee searchingEmployee = null;
+//
+//        if(bindingResult.hasErrors())
+//            return "find-employee";
+
+        int id = employee.getId();
+        String email = employee.getEmail();
+
+        if(id > 0 && email==null)
+            searchingEmployee = employeeDAOBean.getEmployeeFromDataBase(id);
+
+        if(email!=null)
+            searchingEmployee = employeeDAOBean.getEmployeeFromDataBase(email);
+
+        model.addAttribute("searchingEmployee", searchingEmployee);
+        return "employee-card";
+    }
+
+
 }

@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <title>Title</title>
     <style>
         *{
@@ -90,7 +91,7 @@
             background-color: #19467e;
         }
         td{
-            background-color: #6780bc;
+            background-color: gainsboro;
             text-align: center;
         }
         .back{
@@ -149,6 +150,42 @@
             background-color: darkorange;
             color: white;
         }
+        .search-bar{
+            width: 40%;
+            margin: 3% auto;
+            background-color: gainsboro;
+            text-align: left;
+            font-family: sans-serif;
+        }
+        .search-bar h4{
+            color: #3e3f3e;
+            width: 100%;
+        }
+        .search-bar h5{
+            display: inline-block;
+            width: 40%;
+        }
+        .search-bar span{
+            font-size: 1.2rem;
+            display: inline-block;
+            width: 50%;
+            text-align: center;
+        }
+        .search-bar input{
+            margin: auto;
+            width: 50%;
+        }
+        .search-bar button{
+            width: fit-content;
+            border: none;
+            font-size: 0.9rem;
+            padding: 5px 5px;
+            color: #3e3f3e;
+        }
+        .search-bar button:hover{
+            background-color: gold;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -158,6 +195,6 @@
         <button>Add Record</button></a>
     <a href="/db/employment-database">
         <button>Check Data Base</button></a>
-    <a href="find-employee">
+    <a href="/db/find-employee">
         <button>Find Record</button></a>
 </div>

@@ -58,21 +58,45 @@ public class EmployeeDAOBeanImpl implements EmployeeDAOBean {
     @Override
     public void updateEmployeeInDataBase(int employeeId) {
 
-    }
-
-    @Override
-    public void updateEmployeeInDataBase(String email) {
 
     }
+
 
     @Override
     public Employee getEmployeeFromDataBase(int employeeId) {
-        return null;
+
+        if(sessionFactory.isClosed())
+            setNewSession();
+
+        try {
+            session.beginTransaction();
+
+            return session.get(Employee.class, employeeId);
+        }
+        finally {
+            sessionFactory.close();
+        }
     }
 
     @Override
     public Employee getEmployeeFromDataBase(String email) {
-        return null;
+
+        if(sessionFactory.isClosed())
+            setNewSession();
+
+        try {
+            session.beginTransaction();
+
+            List<Employee> list = session.createQuery("from Employee ").getResultList();
+            Employee employee =
+                    list.stream()
+                            .filter(item->item.getEmail().equals(email))
+                            .findAny().get();
+            return employee;
+        }
+        finally {
+            sessionFactory.close();
+        }
     }
 
     @Override
@@ -80,8 +104,4 @@ public class EmployeeDAOBeanImpl implements EmployeeDAOBean {
 
     }
 
-    @Override
-    public void deleteEmployeeFromDataBase(String email) {
-
-    }
 }
