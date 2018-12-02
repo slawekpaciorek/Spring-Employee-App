@@ -22,7 +22,6 @@ public class Employee {
     @Column(nullable = false)
     private String lastName;
 
-    @Pattern(regexp = "\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b", message = "not valid email")
     @NotNull(message = "required")
     @Column(unique = true, nullable = false)
     private String email;

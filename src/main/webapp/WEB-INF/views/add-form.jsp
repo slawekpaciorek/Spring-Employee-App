@@ -10,7 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp"%>
 <h2>Add employee</h2>
-<form:form modelAttribute="employee" action="show-record">
+<form:form modelAttribute="employee" action="employee-confirm">
 
     <div>
         <span>Name : </span>

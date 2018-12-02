@@ -19,29 +19,7 @@ public class StartupController {
         return "index";
     }
 
-    @RequestMapping("/add-employee")
-    public String addForm(Model model){
 
-        Employee employee = new Employee();
-        model.addAttribute("employee", employee );
-
-        System.out.println("Launch add form employee");
-        return "add-form";
-    }
-
-    @RequestMapping("/employee-confirm")
-    public String confirmEmployee(
-            @Valid @ModelAttribute("employee") Employee employee,
-            BindingResult bindingResult){
-
-        if(bindingResult.hasErrors()){
-            return "add-employee";
-        }
-        else {
-            System.out.println("Confirmation page");
-            return "confirmation";
-        }
-    }
 
 
 }

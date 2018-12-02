@@ -3,13 +3,28 @@ package com.sp.dao;
 import com.sp.models.Employee;
 import com.sp.utils.HibernateConnectionConfig;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+
+@Component
 public class EmployeeDAOBeanImpl implements EmployeeDAOBean {
 
-    private Session session = HibernateConnectionConfig.connectToDB(Employee.class);
+    private Session session = HibernateConnectionConfig.connectToDB(Employee.class).getCurrentSession();
+
+    private SessionFactory sessionFactory = session.getSessionFactory();
+
+    private void setNewSession(){
+        session = HibernateConnectionConfig.connectToDB(Employee.class).openSession();
+    }
 
     @Override
     public void createEmployeeInDataBase(Employee employee) {
+
+        if(sessionFactory.isClosed()){
+            setNewSession();
+        }
 
         try{
             session.beginTransaction();
@@ -19,10 +34,25 @@ public class EmployeeDAOBeanImpl implements EmployeeDAOBean {
             session.getTransaction().commit();
 
         }finally {
-            session.getSessionFactory().close();
+            sessionFactory.close();
         }
 
 
+    }
+
+    @Override
+    public List<Employee> getEmployees() {
+
+        if(sessionFactory.isClosed())
+            setNewSession();
+
+        try{
+            session.beginTransaction();
+
+            return session.createQuery("from Employee ").getResultList();
+        }finally {
+            sessionFactory.close();
+        }
     }
 
     @Override
