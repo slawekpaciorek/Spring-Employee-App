@@ -7,8 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="header.jsp"%>
-<h2>Emloyees</h2>
+<h2>Employees</h2>
 <table class="database">
     <tr>
         <th>Id number</th>
@@ -26,8 +27,12 @@
         <td>${employee.email}</td>
         <td>${employee.salary}</td>
         <td>
-            <button id="delete-record">Delete</button>
-            <button id="modify-record">Modify</button>
+            <form:form method="get" action="employee-delete-confirmation" cssClass="action-form">
+                <button id="delete-record" type="submit" name="id" value="${employee.id}">Delete</button>
+            </form:form>
+            <form:form method="get" action="employee-modification-form" cssClass="action-form">
+                <button id="modify-record" type="submit" name="id" value="${employee.id}">Modify</button>
+            </form:form>
         </td>
     </tr>
 </c:forEach>

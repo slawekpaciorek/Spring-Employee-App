@@ -7,7 +7,7 @@
     <div class="search-bar">
         <h4>Find by ID number</h4>
             <form:form action="employee-card" method="get" modelAttribute="employee">
-                <form:input path="id" placeholder="type in id number" />
+                <form:input path="id" placeholder="type in id number"/>
                 <button type="submit">search</button>
             </form:form>
     </div>

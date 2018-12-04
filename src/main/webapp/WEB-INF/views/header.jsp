@@ -85,14 +85,15 @@
         th,td{
             padding: 20px 10px;
             border: none;
-            color: white;
         }
         th{
             background-color: #19467e;
+            color: white;
         }
         td{
-            background-color: gainsboro;
+            color: #3e3f3e;
             text-align: center;
+            border-bottom: solid 1px black;
         }
         .back{
             border-color: red;
@@ -123,14 +124,18 @@
             text-align: center;
         }
         .database td{
-            background-color: gainsboro;
+            background-color: white;
             color: #3e3f3e;
         }
+        .database tr:first-of-type{
+            opacity: 1;
+        }
         .database tr:last-of-type td{
-            background-color: gainsboro;
+            background-color: white;
         }
         .database tr {
             opacity: 0.75;
+            border-bottom: solid 1px black;
         }
         .database tr:hover{
             opacity: 1;
@@ -153,7 +158,7 @@
         .search-bar{
             width: 40%;
             margin: 3% auto;
-            background-color: gainsboro;
+            background-color: white;
             text-align: left;
             font-family: sans-serif;
         }
@@ -174,6 +179,7 @@
         .search-bar input{
             margin: auto;
             width: 50%;
+            border-bottom: solid 1px #3e3f3e;
         }
         .search-bar button{
             width: fit-content;
@@ -185,6 +191,10 @@
         .search-bar button:hover{
             background-color: gold;
             color: white;
+        }
+        .action-form{
+            display: inline-block;
+            width: fit-content;
         }
     </style>
 </head>

@@ -10,7 +10,6 @@ import javax.validation.constraints.Pattern;
 @Table(name="employee")
 public class Employee {
 
-    @Min(value = 1, message = "id must be grater than 1")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

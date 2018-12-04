@@ -56,8 +56,23 @@ public class EmployeeDAOBeanImpl implements EmployeeDAOBean {
     }
 
     @Override
-    public void updateEmployeeInDataBase(int employeeId) {
+    public void updateEmployeeInDataBase(Employee employee) {
 
+        if(sessionFactory.isClosed())
+            setNewSession();
+
+        try{
+
+            session.beginTransaction();
+
+            session.update(employee);
+
+            session.getTransaction().commit();
+
+        }
+        finally {
+            sessionFactory.close();
+        }
 
     }
 
@@ -88,10 +103,12 @@ public class EmployeeDAOBeanImpl implements EmployeeDAOBean {
             session.beginTransaction();
 
             List<Employee> list = session.createQuery("from Employee ").getResultList();
-            Employee employee =
-                    list.stream()
-                            .filter(item->item.getEmail().equals(email))
-                            .findAny().get();
+
+            Employee employee = null;
+            boolean isPresent = list.stream().anyMatch(employee1 -> employee1.getEmail().equals(email));
+
+            if(isPresent==true)
+                employee = list.stream().filter(x->x.getEmail().equals(email)).findAny().get();
             return employee;
         }
         finally {
@@ -101,6 +118,21 @@ public class EmployeeDAOBeanImpl implements EmployeeDAOBean {
 
     @Override
     public void deleteEmployeeFromDataBase(int employeeId) {
+
+        Employee employee = getEmployeeFromDataBase(employeeId);
+
+        if(sessionFactory.isClosed())
+            setNewSession();
+
+        try{
+            session.beginTransaction();
+
+            session.delete(employee);
+
+            session.getTransaction().commit();
+        }finally {
+            sessionFactory.close();
+        }
 
     }
 

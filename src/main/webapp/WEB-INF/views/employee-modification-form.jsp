@@ -1,16 +1,16 @@
 <%--
   Created by IntelliJ IDEA.
   User: slawekpaciorek
-  Date: 29.11.18
-  Time: 21:27
+  Date: 05.12.18
+  Time: 00:23
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp"%>
-<h2>Add employee</h2>
-<form:form modelAttribute="employee" action="employee-confirm">
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<h2>Employee modification</h2>
+<form:form modelAttribute="employee" action="employee-modification-confirmation">
 
     <div>
         <span>Name : </span>
@@ -35,7 +35,7 @@
     </div>
 
     <div>
-        <button type="submit" id="submit-button">Submit</button>
+        <button type="submit" id="submit-button">Modify</button>
     </div>
 
 </form:form>

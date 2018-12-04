@@ -10,9 +10,9 @@ public interface EmployeeDAOBean {
 
     public void createEmployeeInDataBase(Employee employee);
 
-    public List<Employee> getEmployees();
+    public List getEmployees();
 
-    public void updateEmployeeInDataBase(int employeeId);
+    public void updateEmployeeInDataBase(Employee employee);
 
     public Employee getEmployeeFromDataBase(int employeeId);
 

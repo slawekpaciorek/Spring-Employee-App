@@ -9,9 +9,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/db")
@@ -71,6 +73,7 @@ public class DatabaseController {
     @RequestMapping("/find-employee")
     public String findEmployee(Model model){
 
+        System.out.println("Launch searching employee module");
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
 
@@ -79,15 +82,11 @@ public class DatabaseController {
 
     @RequestMapping("/employee-card")
     public String showEmployee(
-            @Valid @ModelAttribute("employee") Employee employee,
-            BindingResult bindingResult,
+            @ModelAttribute("employee") Employee employee,
             Model model){
 
+        System.out.println("Searching modul - result");
         Employee searchingEmployee = null;
-//
-//        if(bindingResult.hasErrors())
-//            return "find-employee";
-
         int id = employee.getId();
         String email = employee.getEmail();
 
@@ -97,8 +96,60 @@ public class DatabaseController {
         if(email!=null)
             searchingEmployee = employeeDAOBean.getEmployeeFromDataBase(email);
 
-        model.addAttribute("searchingEmployee", searchingEmployee);
+        if(searchingEmployee == null) {
+            String message = "Ther is no such an employee";
+            model.addAttribute("message", message);
+        }
+        else
+            model.addAttribute("searchingEmployee", searchingEmployee);
+
         return "employee-card";
+    }
+
+    @RequestMapping("/employee-delete-confirmation")
+    public String deleteEmployee(HttpServletRequest request, Model model){
+
+        int id = Integer.valueOf(request.getParameter("id"));
+
+
+        Employee employee = employeeDAOBean.getEmployeeFromDataBase(id);
+        model.addAttribute("model", employee);
+
+        employeeDAOBean.deleteEmployeeFromDataBase(id);
+
+
+        return "employee-delete-confirmation";
+
+    }
+    @RequestMapping("/employee-modification-form")
+    public String modifyEmployee(Model model, HttpServletRequest request){
+
+        int id = Integer.valueOf(request.getParameter("id"));
+
+        Employee employee = employeeDAOBean.getEmployeeFromDataBase(id);
+
+        model.addAttribute("employee", employee);
+
+        return "employee-modification-form";
+    }
+
+    @RequestMapping("/employee-modification-confirm")
+    public String modifyEmployee(@Valid @ModelAttribute("employee") Employee employee, BindingResult bindingResult, Model model){
+
+        if(bindingResult.hasErrors())
+            return "employee-modification-form";
+
+        int id = employee.getId();
+
+        Employee oldEmployee = employeeDAOBean.getEmployeeFromDataBase(id);
+
+        model.addAttribute("oldEmployee", oldEmployee);
+        model.addAttribute("newEmployee", employee);
+
+        employeeDAOBean.updateEmployeeInDataBase(employee);
+
+        return "employee-modification confirm";
+
     }
 
 
