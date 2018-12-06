@@ -10,7 +10,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <h2>Employee modification</h2>
-<form:form modelAttribute="employee" action="employee-modification-confirmation">
+<form:form modelAttribute="employee" action="employee-modification-confirm">
 
     <div>
         <span>Name : </span>

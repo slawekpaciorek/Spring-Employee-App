@@ -122,9 +122,11 @@ public class DatabaseController {
 
     }
     @RequestMapping("/employee-modification-form")
-    public String modifyEmployee(Model model, HttpServletRequest request){
+    public String modifyEmployee(Model model, HttpServletRequest request,HttpSession session){
 
         int id = Integer.valueOf(request.getParameter("id"));
+
+        session.setAttribute("id", id);
 
         Employee employee = employeeDAOBean.getEmployeeFromDataBase(id);
 
@@ -134,17 +136,16 @@ public class DatabaseController {
     }
 
     @RequestMapping("/employee-modification-confirm")
-    public String modifyEmployee(@Valid @ModelAttribute("employee") Employee employee, BindingResult bindingResult, Model model){
+    public String modifyEmployee(@Valid @ModelAttribute("employee") Employee employee, BindingResult bindingResult, Model model, HttpSession session){
 
         if(bindingResult.hasErrors())
             return "employee-modification-form";
 
-        int id = employee.getId();
-
-        Employee oldEmployee = employeeDAOBean.getEmployeeFromDataBase(id);
-
-        model.addAttribute("oldEmployee", oldEmployee);
         model.addAttribute("newEmployee", employee);
+
+        int id = Integer.valueOf((Integer) session.getAttribute("id"));
+
+        employee.setId(id);
 
         employeeDAOBean.updateEmployeeInDataBase(employee);
 

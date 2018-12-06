@@ -20,7 +20,9 @@
             <form:form method="get" action="employee-delete-confirmation" cssClass="action-form">
                 <button id="delete-record" type="submit" name="id" value="${searchingEmployee.id}">Delete</button>
             </form:form>
-            <button id="modify-record" type="submit" name="id" value="${searchingEmployee.id}">Modify</button>
+            <form:form method="get" action="employee-modification-form" cssClass="action-form">
+                <button id="modify-record" type="submit" name="id" value="${searchingEmployee.id}">Modify</button>
+            </form:form>
         </div>
     </c:when>
     <c:otherwise>

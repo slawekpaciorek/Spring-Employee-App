@@ -65,7 +65,12 @@ public class EmployeeDAOBeanImpl implements EmployeeDAOBean {
 
             session.beginTransaction();
 
-            session.update(employee);
+            Employee oldEmployee = session.get(Employee.class, employee.getId());
+
+            oldEmployee.setName(employee.getName());
+            oldEmployee.setLastName(employee.getLastName());
+            oldEmployee.setSalary(employee.getSalary());
+            oldEmployee.setEmail(employee.getEmail());
 
             session.getTransaction().commit();
 

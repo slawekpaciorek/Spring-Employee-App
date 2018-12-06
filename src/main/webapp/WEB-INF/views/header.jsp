@@ -15,7 +15,7 @@
             text-align: center;
             width: 100%;
             padding: 20px 0;
-            font-family: Ubuntu;
+            font-family: Ubuntu, sans-serif;
             clear: both;
         }
         h2{
@@ -48,7 +48,7 @@
             display: block;
             width: 100%;
             text-align: center;
-            font-family: Garuda;
+            font-family: Garuda, sans-serif;
         }
 
         form div{
@@ -109,6 +109,7 @@
         }
         tr:last-of-type td{
             background-color: white;
+            border: none;
         }
         .box{
             box-shadow: 0 0 10px 5px #19467e;
@@ -173,7 +174,7 @@
         .search-bar span{
             font-size: 1.2rem;
             display: inline-block;
-            width: 50%;
+            width: 55%;
             text-align: center;
         }
         .search-bar input{
@@ -183,14 +184,19 @@
         }
         .search-bar button{
             width: fit-content;
-            border: none;
             font-size: 0.9rem;
             padding: 5px 5px;
             color: #3e3f3e;
+            border: solid 2px #3e3f3e;
+            border-radius: 5px;
+            display: block;
+            margin: 10px auto;
+            float: none;
         }
         .search-bar button:hover{
             background-color: gold;
             color: white;
+            border: none;
         }
         .action-form{
             display: inline-block;
