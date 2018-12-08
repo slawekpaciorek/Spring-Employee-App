@@ -1,32 +1,44 @@
 package com.sp;
 
 import com.sp.dao.EmployeeDAOBeanImpl;
+import com.sp.models.Agreement;
+import com.sp.models.Document;
 import com.sp.models.Employee;
+import com.sp.utils.AgreementType;
+import com.sp.utils.DocumentState;
+import com.sp.utils.HibernateConnectionConfig;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import java.time.LocalDate;
 
 public class App {
 
     public static void main(String[] args) {
 
-        System.out.println("Setting employee");
+        SessionFactory sessionFactory = HibernateConnectionConfig.connectToDB(Agreement.class);
 
-        Employee employee = new Employee();
-        employee.setName("Sławek");
-        employee.setLastName("Paciorek");
-        employee.setSalary(5500.00);
-        employee.setEmail("sp@gmail.com");
+        Session session = sessionFactory.getCurrentSession();
 
-        System.out.println("Creating instance of EmployeeDAOBeanImpl");
+        try{
+            session.beginTransaction();
 
-        EmployeeDAOBeanImpl employeeDAOBean = new EmployeeDAOBeanImpl();
+            LocalDate localDate = LocalDate.now();
+            DocumentState state = DocumentState.SUSPEND;
+            AgreementType type = AgreementType.B2B;
+            String description = "You will be responsible for developing web app with business logic";
+            String role = "junior java developer";
+            int length = 3;
 
-        System.out.println("Saving employee to DB");
+            Agreement agreement = new Agreement(localDate, state, type, description, role, length);
 
-        employeeDAOBean.createEmployeeInDataBase(employee);
+            session.save(agreement);
 
-        System.out.println("Success!");
+            session.getTransaction().commit();
 
-
-
+        }finally {
+            sessionFactory.close();
+        }
     }
 
 }

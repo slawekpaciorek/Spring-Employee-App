@@ -1,11 +1,14 @@
 package com.sp.models;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+@Component
 @Entity
 @Table(name="employee")
 public class Employee {

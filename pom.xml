@@ -42,9 +42,9 @@
       <version>1.2</version>
     </dependency>
     <dependency>
-      <groupId>javaee</groupId>
+      <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
-      <version>5</version>
+      <version>8.0</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
